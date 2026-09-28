@@ -1,0 +1,12 @@
+# Datos de PostgreSQL
+datos_prestamos/
+
+# Variables de entorno
+.env
+
+# Archivos temporales
+*.log
+
+# Archivos del sistema
+Thumbs.db
+.DS_Store

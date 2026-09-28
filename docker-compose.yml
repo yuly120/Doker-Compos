@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Servidor de Base de Datos para Préstamos
+  db_prestamos:
+    image: postgres:16
+    container_name: contenedor_db_prestamos
+    environment:
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: bd_prestamos
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./datos_prestamos:/var/lib/postgresql/data
+    networks:
+      - red_prestamos
+
+  # Administrador Visual
+  admin_prestamos:
+    image: dpage/pgadmin4
+    container_name: contenedor_admin_prestamos
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@ejemplo.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8081:80"
+    depends_on:
+      - db_prestamos
+    networks:
+      - red_prestamos
+
+networks:
+  red_prestamos:
+    driver: bridge
